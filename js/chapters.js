@@ -6,8 +6,8 @@ const chapters = [
     },
     {
         id: 2,
-        title: "Data Types",
-        file: "chapter-2_data-type.md"
+        title: "Loops Operators",
+        file: "chapter-2_loops-operators.md"
     },
     {
         id: 3,

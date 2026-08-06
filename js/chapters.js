@@ -1,8 +1,8 @@
 const chapters = [
     {
         id: 1,
-        title: "let, const aur var",
-        file: "chapter-1_varialbe.md"
+        title: "JavaScript Basics",
+        file: "chapter-1_javascript-basics.md"
     },
     {
         id: 2,
@@ -125,5 +125,5 @@ const chapters = [
         file: "chapter-25_logic-building-level10.md"
     }
 
-    
+
 ];

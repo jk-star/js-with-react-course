@@ -11,8 +11,8 @@ const chapters = [
     },
     {
         id: 3,
-        title: "Template Literals",
-        file: "chapter-3_template-literals.md"
+        title: "Statement And Function",
+        file: "chapter-3_statement-function.md"
     },
     {
         id: 4,

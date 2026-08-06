@@ -16,8 +16,8 @@ const chapters = [
     },
     {
         id: 4,
-        title: "Decision Making",
-        file: "chapter-4_decision-making.md"
+        title: "Events And Classes",
+        file: "chapter-4_event-classes.md"
     },
     {
         id: 5,

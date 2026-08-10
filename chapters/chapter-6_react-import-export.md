@@ -1,5 +1,5 @@
 
-# Chapter 6 React
+# Chapter 6 React Import / Export
 
 ## Import / Export क्यों?
 - जब एक JavaScript file की कोई चीज़—जैसे **variable, function, object या component**—दूसरी file में use करनी हो, तब `export` और `import` काम आते हैं।

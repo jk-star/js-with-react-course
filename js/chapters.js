@@ -34,6 +34,26 @@ const chapters = [
         title: "React Props",
         file: "chapter-7_react-props.md"
     },
+    {
+        id: 8,
+        title: "useState Hook",
+        file: "chapter-8_useState-hook.md"
+    },
+    {
+        id: 9,
+        title: "useEffect Hook",
+        file: "chapter-9_useEffect-hook.md"
+    },
+    {
+        id: 10,
+        title: "HTTP Requests",
+        file: "chapter-10_http-requests.md"
+    },
+    {
+        id: 11,
+        title: "Async Await",
+        file: "chapter-11_async-await.md"
+    },
     
 
 

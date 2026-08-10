@@ -1,4 +1,4 @@
-# Chapter 7
+# Chapter 7 React Props
 
 - **Props — Parent से Child Component में data भेजना।**
 

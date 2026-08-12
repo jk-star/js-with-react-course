@@ -54,6 +54,16 @@ const chapters = [
         title: "Async Await",
         file: "chapter-11_async-await.md"
     },
+    {
+        id: 12,
+        title: "API + Fetch",
+        file: "chapter-12_fetch-api.md"
+    },
+    {
+        id: 13,
+        title: "User API",
+        file: "chapter-13_user-api.md"
+    }
     
 
 

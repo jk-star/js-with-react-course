@@ -424,12 +424,296 @@ const total = useMemo(() => {
 
 **`useMemo` का primary purpose:**
 
-- **Expensive calculation के result को memoize करना।**
+- Expensive calculation के result को memoize करना।
 
-- **`React.memo()` का primary purpose:**
+**`React.memo()`** का primary purpose:
 
-- **Props same होने पर unnecessary child component re-render को avoid करना।**
+- Props same होने पर unnecessary child component re-render को avoid करना।
 
 **`useEffect()` का primary purpose:**
 
-- **Render के बाद side effects perform करना।**
+- Render के बाद side effects perform करना।
+
+## Practical 
+
+## 🟢 Level 1 — Basic useMemo
+
+**Q1. Expensive Calculation**
+
+```Text
+एक React app बनाइए जिसमें:
+
+num नाम का state हो।
+एक input/button से num change हो।
+num * 100 calculate करें।
+calculation के अंदर console.log("Calculation Running") लगाएँ।
+पहले बिना useMemo के observe करें।
+फिर useMemo लगाएँ।
+
+Goal: समझना कि calculation कब दोबारा चलती है।
+```
+
+
+**Q2. Two States**
+
+दो states बनाइए:
+
+```js
+const [num, setNum] = useState(0);
+const [name, setName] = useState("");
+```
+
+और:
+
+```js
+const result = useMemo(() => {
+    console.log("Calculation Running");
+    return num * 100;
+}, [num]);
+```
+
+अब:
+
+```Text
+num बदलें
+name बदलें
+
+Observe करें:
+
+name बदलने पर calculation क्यों नहीं चल रही?
+
+```
+
+**Q3. Empty Dependency**
+
+इस code को test करें:
+
+```js
+const result = useMemo(() => {
+    console.log("Calculation Running");
+
+    return num * 100;
+}, []);
+```
+
+अब:
+
+```text
+page reload करें
+num change करें
+name change करें
+
+Question: Calculation कितनी बार चली?
+
+और खुद explain करें कि [] का क्या मतलब है।
+```
+
+## 🟡 Level 2 — Dependency Array
+**Q4. num Dependency**
+
+ऐसा app बनाइए:
+
+```text
+Name: [________]
+
+Number: 10
+
+Result: 1000
+
+```
+
+Calculation: ``num * 100``
+
+Use: ``useMemo(..., [num])``
+
+अब check करें:
+
+- Name change → calculation?
+- Number change → calculation?
+
+**आपको answer खुद देना है।**
+
+**Q5. Multiple Dependencies**
+
+Calculation बनाइए:
+
+```js
+const result = useMemo(() => {
+    return `${name}-${num}`;
+}, [name, num]);
+```
+
+अब test करें: 
+
+| Action                     | Calculation चलेगी? |
+| -------------------------- | ------------------ |
+| Name change                | ?                  |
+| Number change              | ?                  |
+| कोई unrelated state change | ?                  |
+
+
+**Q6. Missing Dependency**
+
+यह code दिया गया है:
+
+```js
+const result = useMemo(() => {
+    return num * multiplier;
+}, [num]);
+```
+
+अब:
+
+```js
+const [num, setNum] = useState(10);
+const [multiplier, setMultiplier] = useState(2);
+```
+
+- अगर `multiplier` change होता है तो क्या होगा?
+- Task: Bug identify करके dependency array सही करें।
+
+## 🟠 Level 3 — Real Practical Problems
+**Q7. Product Filter**
+
+**आपके पास products हैं:**
+
+```js
+const products = [
+    { name: "Laptop", price: 50000 },
+    { name: "Mobile", price: 20000 },
+    { name: "Mouse", price: 500 },
+    { name: "Keyboard", price: 1500 },
+];
+```
+
+**एक price filter बनाइए:**
+
+```text
+Minimum Price: 1000
+
+Laptop
+Mobile
+Keyboard
+```
+
+- Filtering को useMemo से optimize करें।
+
+- Condition: `products.filter(...)` के अंदर: `console.log("Filtering Products...");` लगाएँ। फिर एक दूसरा unrelated state बनाकर देखें कि filtering कब चलती है।
+
+**Q8. Search Filter**
+
+- एक product search application बनाइए:
+
+```text
+Search: [lap]
+
+Laptop
+Laptop Stand
+Laptop Bag
+```
+
+Use: ``useMemo()``
+
+- Search बदलने पर filtered result update होना चाहिए।
+- लेकिन unrelated state बदलने पर filtering unnecessarily नहीं होनी चाहिए।
+
+**Q9. Sorting**
+
+Products को price के आधार पर sort करें:
+
+```text
+Sort: Low to High
+
+Mouse       ₹500
+Keyboard    ₹1500
+Mobile      ₹20000
+Laptop      ₹50000
+```
+
+- Sorting को useMemo() से optimize करें।
+- Important: Original array को mutate मत करें।
+
+![Screenshot](./image/usememo-level3-task.png)
+
+## 🔴 Level 4 — useMemo + React.memo
+
+- यह level सबसे important है क्योंकि इससे आपका confusion दूर होगा कि:
+
+- **`useMemo`** और **`React.memo()`** में difference क्या है?
+
+**Q10. Parent + Child**
+
+दो components बनाइए:
+
+```text
+App
+ ├── Counter
+ └── Random
+ ```
+
+ App में: `const [num, setNum] = useState(0);`
+
+और Random में:
+
+```js
+function Random() {
+    console.log("Random Rendered");
+
+    return <div>Random Component</div>;
+}
+```
+
+- अब ``num`` change करें। 
+- Observe करें: Random कितनी बार render हो रहा है?
+
+**Q11. React.memo() लगाइए**
+
+अब:
+
+```js
+const Random = React.memo(function Random() {
+    console.log("Random Rendered");
+
+    return <div>Random Component</div>;
+});
+```
+
+फिर ``num`` change करें।
+
+**Question:**
+
+पहले क्या हुआ?
+
+और `React.memo()` लगाने के बाद क्या हुआ?
+
+**Q12. Props के साथ React.memo**
+
+अब Random को prop दें:
+
+`<Random name={name} />`
+
+और:
+
+```js
+const Random = React.memo(function Random({ name }) {
+    console.log("Random Rendered");
+
+    return <div>{name}</div>;
+});
+```
+
+अब:
+
+```text
+num change करें
+name change करें
+```
+
+Determine करें:
+
+```text
+num change → Random render?
+name change → Random render?
+```
+
+![Screenshot](./image/usememo-level4-task.png)

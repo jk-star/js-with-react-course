@@ -88,6 +88,11 @@ const chapters = [
         id: 18,
         title: "Context API",
         file: "chapter-18_context-api.md"
+    },
+    {
+        id: 19,
+        title: "useReducer",
+        file: "chapter-19_useReducer.md"
     }
     
 

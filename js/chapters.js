@@ -68,6 +68,11 @@ const chapters = [
         id: 14,
         title: "useRef",
         file: "chapter-14_useRef.md"
+    },
+    {
+        id: 15,
+        title: "useMemo",
+        file: "chapter-15_useMemo.md"
     }
     
 

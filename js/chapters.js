@@ -73,6 +73,16 @@ const chapters = [
         id: 15,
         title: "useMemo",
         file: "chapter-15_useMemo.md"
+    },
+    {
+        id: 16,
+        title: "useCallback",
+        file: "chapter-16_performance-optimization.md"
+    },
+    {
+        id: 17,
+        title: "Custom Hook",
+        file: "chapter-17_custom-hook.md"
     }
     
 

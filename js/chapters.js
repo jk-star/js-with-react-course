@@ -83,6 +83,11 @@ const chapters = [
         id: 17,
         title: "Custom Hook",
         file: "chapter-17_custom-hook.md"
+    },
+    {
+        id: 18,
+        title: "Context API",
+        file: "chapter-18_context-api.md"
     }
     
 
